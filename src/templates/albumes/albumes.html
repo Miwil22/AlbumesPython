@@ -12,7 +12,7 @@
         <thead>
             <tr style="background-color: #f2f2f2;">
                 <th>ID</th>
-                <th>TÍTULO</th>
+                <th>TITULO</th>
                 <th>ARTISTA</th>
                 <th>GÉNERO</th>
                 <th>LANZAMIENTO</th>
@@ -23,7 +23,7 @@
             {% for album in albumes %}
             <tr>
                 <td>{{ album.id }}</td>
-                <td><strong>{{ album.titulo }}</strong></td>
+                <td><strong>{{ album.nombre }}</strong></td>
                 <td>{{ album.artista }}</td>
                 <td>{{ album.genero }}</td>
                 <td>{{ album.fecha_lanzamiento }}</td>

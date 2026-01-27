@@ -74,7 +74,7 @@ async def album_por_id(album_id: int, request: Request, session: SessionDep):
     if not album_encontrado:
         raise HTTPException(status_code=404, detail="Album no encontrado")
     album_response = map_album_to_response(album_encontrado)
-    return templates.TemplateResponse("albumes/albumes_detalle.html", {
+    return templates.TemplateResponse("albumes/album_detalle.html", {
         "request": request,
         "album": album_response
     })
