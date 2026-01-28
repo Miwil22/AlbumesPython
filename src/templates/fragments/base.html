@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Colección Musical{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
+</head>
+<body>
+    
+    <nav style="background-color: #2c3e50; padding: 15px; margin-bottom: 20px;">
+        <a href="/" style="color: white; margin-right: 20px;">🏠 Inicio</a>
+        <a href="/albumes" style="color: white;">🎵 Ver Álbumes</a>
+    </nav>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer style="margin-top: 50px; text-align: center; color: #777; font-size: 0.9em;">
+        <p>Proyecto de Álbumes - DAW2</p>
+    </footer>
+
+</body>
+</html>
