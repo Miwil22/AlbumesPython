@@ -1,0 +1,12 @@
+{% extends "fragments/base.html" %}
+{% block title %}Inicio - Colección de Música{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido a tu Colección de Música 🎸</h1>
+    <p>Gestiona tus discos favoritos de forma sencilla.</p>
+    
+    <ul>
+        <li><a href="{{ url_for('ver_albumes') }}">🎵 Ver lista de Álbumes</a></li>
+        <li><a href="{{ url_for('static', path='static.html') }}">ℹ️ Ver contenido estático</a></li>
+    </ul>
+{% endblock %}

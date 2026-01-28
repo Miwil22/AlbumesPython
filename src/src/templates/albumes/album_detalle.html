@@ -1,0 +1,17 @@
+{% extends "fragments/base.html" %}
+{% block title %}Detalle del Álbum{% endblock %}
+
+{% block content %}
+    <div style="border: 1px solid #ccc; padding: 20px; max-width: 600px;">
+        <h2>🎧 Detalle: {{ album.nombre }}</h2>
+        <ul>
+            <li><strong>ID:</strong> {{ album.id }}</li>
+            <li><strong>Artista:</strong> {{ album.artista }}</li>
+            <li><strong>Género:</strong> {{ album.genero }}</li>
+            <li><strong>Fecha Lanzamiento:</strong> {{ album.fecha_lanzamiento }}</li>
+        </ul>
+        
+        <br>
+        <a href="/albumes">← Volver al listado</a>
+    </div>
+{% endblock %}

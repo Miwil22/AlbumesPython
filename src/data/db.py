@@ -19,13 +19,19 @@ def get_session():
         yield session
 
 def init_db():
+    # Borra las tablas y las crea de nuevo (Reset completo)
     SQLModel.metadata.drop_all(engine)
     SQLModel.metadata.create_all(engine)
+    
     with Session(engine) as session:
-        session.add(Album(nombre="Thriller", artista="Michael Jackson", genero="Pop", fecha_lanzamiento="1982-11-30"))
-        session.add(Album(nombre="Back in Black", artista="AC/DC", genero="Hard Rock", fecha_lanzamiento="1980-07-25"))
-        session.add(Album(nombre="The Dark Side of the Moon", artista="Pink Floyd", genero="Progressive Rock", fecha_lanzamiento="1973-03-01"))
-        session.add(Album(nombre="Future Nostalgia", artista="Dua Lipa", genero="Pop", fecha_lanzamiento="2020-03-27"))
-        session.add(Album(nombre="Un Verano Sin Ti", artista="Bad Bunny", genero="Urbano", fecha_lanzamiento="2022-05-06"))
-        session.add(Album(nombre="Motomami", artista="Rosalía", genero="Pop/Experimental", fecha_lanzamiento="2022-03-18"))
+        session.add(Album(nombre="POST HUMAN: NEX GEN", artista="Bring Me The Horizon", genero="Alt Metal / Electronic", fecha_lanzamiento="2024-05-24"))
+        session.add(Album(nombre="The Death of Peace of Mind", artista="Bad Omens", genero="Industrial / Metalcore", fecha_lanzamiento="2022-02-25"))
+        session.add(Album(nombre="Scoring The End of the World", artista="Motionless in White", genero="Industrial Metal", fecha_lanzamiento="2022-06-10"))
+        session.add(Album(nombre="Take Me Back To Eden", artista="Sleep Token", genero="Prog / Alt Metal", fecha_lanzamiento="2023-05-19"))
+        session.add(Album(nombre="Paper Hearts", artista="Sleep Theory", genero="Alt Rock / Metal", fecha_lanzamiento="2023-09-29"))
+        session.add(Album(nombre="I Disagree", artista="Poppy", genero="Nu Metal / Pop", fecha_lanzamiento="2020-01-10"))
+        session.add(Album(nombre="The Black Parade", artista="My Chemical Romance", genero="Emo / Rock Opera", fecha_lanzamiento="2006-10-23"))
+        session.add(Album(nombre="Shame On Me", artista="Catch Your Breath", genero="Alt Metal", fecha_lanzamiento="2023-10-20"))
+        session.add(Album(nombre="The Hell We Create", artista="Fit For A King", genero="Metalcore", fecha_lanzamiento="2022-10-28"))
+        session.add(Album(nombre="I Let It In and It Took Everything", artista="Loathe", genero="Metalcore / Shoegaze", fecha_lanzamiento="2020-02-07"))
         session.commit()

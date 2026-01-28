@@ -1,17 +1,68 @@
-{% extends "fragments/base.html" %}
-{% block title %}Detalle del Álbum{% endblock %}
-
-{% block content %}
-    <div style="border: 1px solid #ccc; padding: 20px; max-width: 600px;">
-        <h2>🎧 Detalle: {{ album.nombre }}</h2>
-        <ul>
-            <li><strong>ID:</strong> {{ album.id }}</li>
-            <li><strong>Artista:</strong> {{ album.artista }}</li>
-            <li><strong>Género:</strong> {{ album.genero }}</li>
-            <li><strong>Fecha Lanzamiento:</strong> {{ album.fecha_lanzamiento }}</li>
-        </ul>
-        
-        <br>
-        <a href="/albumes">← Volver al listado</a>
+{% extends "fragments/base.html" %} {% block title %}Detalle - {{ album.nombre
+}}{% endblock %} {% block content %}
+<div class="center-screen">
+  <div class="detalle-box">
+    <div class="text-center mb-5">
+      <h2
+        style="
+          font-family: &quot;Oswald&quot;;
+          color: #fff;
+          letter-spacing: 2px;
+          margin: 0;
+        "
+      >
+        FICHA TÉCNICA
+      </h2>
+      <div
+        style="
+          height: 2px;
+          width: 50px;
+          background: var(--accent-red);
+          margin: 10px auto;
+        "
+      ></div>
     </div>
+
+    <div class="data-list">
+      <div class="data-row">
+        <span class="data-label">ID REF:</span>
+        <span class="data-value" style="color: var(--accent-red)"
+          >{{ album.id }}</span
+        >
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">ARTISTA:</span>
+        <span class="data-value" style="color: var(--accent-red)"
+          >{{ album.artista }}</span
+        >
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">ÁLBUM:</span>
+        <span class="data-value">{{ album.nombre }}</span>
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">GÉNERO:</span>
+        <span class="data-value">{{ album.genero }}</span>
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">FECHA:</span>
+        <span class="data-value">{{ album.fecha_lanzamiento }}</span>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <a
+        href="/albumes"
+        class="btn-ghost w-100 text-center"
+        style="border-color: #444; color: #888"
+      >
+        <i class="bi bi-arrow-left"></i> VOLVER AL ARCHIVO
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

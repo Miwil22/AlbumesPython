@@ -1,0 +1,28 @@
+name: fastapi-albumes
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app-albumes
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app
+    depends_on:
+      - fastapi-db
+    environment:
+      - DB_SERVER=fastapi-db
+  
+  fastapi-db:
+    image: mysql
+    container_name: fastapi-db-albumes
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: albumesdb
+      MYSQL_USER: miguel
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"

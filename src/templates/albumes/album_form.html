@@ -1,36 +1,47 @@
 {% extends "fragments/base.html" %}
-{% block title %}Nuevo Álbum{% endblock %}
+{% block title %}Nuevo Registro - NEXUS{% endblock %}
 
 {% block content %}
+<div class="center-screen">
     <div class="form-container">
-        <h1>💿 Añadir Nuevo Álbum</h1>
         
-        <form method="post" action="/albumes/new" enctype="application/x-www-form-urlencoded">
-            <div class="form-group">
-                <label for="nombre">Nombre del Álbum:</label><br>
-                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Thriller">
-            </div>
-            
-            <div class="form-group">
-                <label for="artista">Artista:</label><br>
-                <input type="text" id="artista" name="artista" required placeholder="Ej: Michael Jackson">
+        <div class="text-center mb-5">
+            <h2 style="font-family: 'Oswald'; color: #fff; letter-spacing: 2px; margin: 0;">NUEVO REGISTRO</h2>
+            <p style="color: #666; font-size: 0.9rem;">INTRODUCE LOS DATOS DEL ÁLBUM</p>
+        </div>
+
+        <form method="post">
+            <div class="mb-4">
+                <label>Nombre del Álbum</label>
+                <input type="text" name="nombre" required placeholder="Escribe el nombre del disco...">
             </div>
 
-            <div class="form-group">
-                <label for="genero">Género Musical:</label><br>
-                <input type="text" id="genero" name="genero" placeholder="Ej: Pop">
+            <div class="mb-4">
+                <label>Artista / Banda</label>
+                <input type="text" name="artista" required placeholder="Nombre de la banda...">
             </div>
 
-            <div class="form-group">
-                <label for="fecha_lanzamiento">Fecha de Lanzamiento:</label><br>
-                <input type="date" id="fecha_lanzamiento" name="fecha_lanzamiento">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label>Género Musical</label>
+                    <input type="text" name="genero" placeholder="Ej: Metalcore">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label>Lanzamiento</label>
+                    <input type="date" name="fecha_lanzamiento">
+                </div>
             </div>
-            
-            <br>
-            <button type="submit" style="padding: 10px 20px; cursor: pointer;">Guardar Álbum</button>
+
+            <div class="mt-4 d-flex gap-3">
+                <a href="/albumes" class="btn-ghost w-50 text-center" style="border-color: #444; color: #888;">
+                    CANCELAR
+                </a>
+                <button type="submit" class="btn-ghost w-50" style="background-color: var(--accent-red); border-color: var(--accent-red); color: black;">
+                    GUARDAR DATOS
+                </button>
+            </div>
         </form>
-        
-        <br>
-        <a href="/albumes">← Volver al listado</a>
+
     </div>
+</div>
 {% endblock %}
