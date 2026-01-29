@@ -12,34 +12,28 @@ def get_connection():
 def iniciar_db():
     conn = get_connection()
     cursor = conn.cursor()
-
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS albumes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL, 
+            nombre TEXT NOT NULL,
             artista TEXT NOT NULL,
             genero TEXT NOT NULL,
             fecha_lanzamiento TEXT NOT NULL
         )
     """)
-
+    
     cursor.execute("SELECT COUNT(*) FROM albumes")
     if cursor.fetchone()[0] == 0:
-        print("Generando datos locales...")
         datos = [
-            ("POST HUMAN: NEX GEN", "Bring Me The Horizon", "Alt Metal / Electronic", "2024-05-24"),
-            ("The Death of Peace of Mind", "Bad Omens", "Industrial / Metalcore", "2022-02-25"),
-            ("Scoring The End of the World", "Motionless in White", "Industrial Metal", "2022-06-10"),
-            ("Take Me Back To Eden", "Sleep Token", "Prog / Alt Metal", "2023-05-19"),
-            ("Paper Hearts", "Sleep Theory", "Alt Rock / Metal", "2023-09-29"),
-            ("I Disagree", "Poppy", "Nu Metal / Pop", "2020-01-10"),
-            ("The Black Parade", "My Chemical Romance", "Emo / Rock Opera", "2006-10-23"),
-            ("Shame On Me", "Catch Your Breath", "Alt Metal", "2023-10-20"),
-            ("The Hell We Create", "Fit For A King", "Metalcore", "2022-10-28"),
-            ("I Let It In and It Took Everything", "Loathe", "Metalcore / Shoegaze", "2020-02-07")
+            ("POST HUMAN: NEX GEN", "Bring Me The Horizon", "Alt Metal", "2024-05-24"),
+            ("The Death of Peace of Mind", "Bad Omens", "Industrial", "2022-02-25"),
+            ("Scoring The End of the World", "Motionless in White", "Metalcore", "2022-06-10"),
+            ("Take Me Back To Eden", "Sleep Token", "Prog Metal", "2023-05-19")
         ]
         cursor.executemany("INSERT INTO albumes (nombre, artista, genero, fecha_lanzamiento) VALUES (?, ?, ?, ?)", datos)
         conn.commit()
+    
     conn.close()
 
 def obtener_albumes():
@@ -50,3 +44,21 @@ def obtener_albumes():
     resultados = [dict(row) for row in cursor.fetchall()]
     conn.close()
     return resultados
+
+def crear_nuevo_album(nombre, artista, genero, fecha):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO albumes (nombre, artista, genero, fecha_lanzamiento) VALUES (?, ?, ?, ?)", 
+                   (nombre, artista, genero, fecha))
+    conn.commit()
+    conn.close()
+
+def obtener_album_por_id(id_album):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM albumes WHERE id = ?", (id_album,))
+    fila = cursor.fetchone()
+    conn.close()
+    if fila:
+        return dict(fila)
+    return None

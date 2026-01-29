@@ -5,12 +5,12 @@
     --card-bg: #0a0a0a;
 }
 
-
 ::selection {
-    background: var(--accent-red) !important;
+    background-color: var(--accent-red) !important;
     color: #ffffff !important;
     text-shadow: none;
 }
+
 
 body {
     background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
