@@ -1,44 +1,34 @@
-import mysql.connector
+import sqlite3
+import os
 
-db_config = {
-    'host': '127.0.0.1',      
-    'user': 'root',          
-    'password': '',   
-    'database': 'albumes_db'  
-}
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "albumes.db")
 
 def get_connection():
-    temp_config = db_config.copy()
-    del temp_config['database']
-    
-    conn = mysql.connector.connect(**temp_config)
-    cursor = conn.cursor()
-    
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_config['database']}")
-    conn.close()
-
-    return mysql.connector.connect(**db_config)
+    """Conecta a la base de datos SQLite (archivo local)."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row 
+    return conn
 
 def iniciar_db():
     conn = get_connection()
     cursor = conn.cursor()
 
-
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS albumes (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            titulo VARCHAR(255) NOT NULL,
-            artista VARCHAR(255) NOT NULL,
-            genero VARCHAR(255) NOT NULL,
-            fecha_lanzamiento DATE NOT NULL
-            )
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titulo TEXT NOT NULL,
+            artista TEXT NOT NULL,
+            genero TEXT NOT NULL,
+            fecha_lanzamiento TEXT NOT NULL
+        )
     """)
 
     cursor.execute("SELECT COUNT(*) FROM albumes")
     count = cursor.fetchone()[0]
 
     if count == 0:
-        print("Cargando datos nuevos en MySQL...")
+        print("Generando archivo de base de datos local (SQLite)...")
         
         datos = [
             ("POST HUMAN: NEX GEN", "Bring Me The Horizon", "Alt Metal / Electronic", "2024-05-24"),
@@ -55,23 +45,20 @@ def iniciar_db():
 
         cursor.executemany("""
             INSERT INTO albumes (titulo, artista, genero, fecha_lanzamiento) 
-            VALUES (%s, %s, %s, %s)
+            VALUES (?, ?, ?, ?)
         """, datos)
         
         conn.commit()
-        print("Datos insertados correctamente.")
 
-    cursor.close()
     conn.close()
 
 def obtener_albumes():
     iniciar_db() 
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True) 
+    cursor = conn.cursor()
     
     cursor.execute("SELECT * FROM albumes")
-    resultados = cursor.fetchall()
+    resultados = [dict(row) for row in cursor.fetchall()]
     
-    cursor.close()
     conn.close()
     return resultados

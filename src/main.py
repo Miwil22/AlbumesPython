@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
-from database import obtener_albumes
+from data.db import obtener_albumes
 
 app = FastAPI()
 
@@ -30,7 +30,7 @@ def ver_albumes(request: Request):
 
 @app.get("/api/info")
 def ver_api():
-    return {"mensaje": "API conectada a MySQL Localhost"}
+    return {"mensaje": "API funcionando con Base de Datos Local (SQLite)"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
