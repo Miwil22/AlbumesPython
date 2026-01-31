@@ -6,17 +6,10 @@
 }
 
 ::selection {
-    background-color: var(--accent-red) !important;
+    background: var(--accent-red) !important;
     color: #ffffff !important;
     text-shadow: none;
 }
-
-::-webkit-selection {
-        background: #ff003c !important;
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-      }
-
 
 body {
     background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
@@ -49,13 +42,23 @@ body {
     position: relative;
 }
 
+.table-responsive {
+    padding: 10px 25px;
+    overflow: visible !important;
+    overflow-x: unset !important;
+}
+
 .table-dark-custom { 
-    width: 100%; border-collapse: separate;
+    width: 100%; 
+    border-collapse: separate;
     border-spacing: 0 10px; 
 }
+
 .table-dark-custom th {
-    color: var(--accent-red); text-transform: uppercase;
-    border: none; padding: 15px;
+    color: var(--accent-red); 
+    text-transform: uppercase;
+    border: none; 
+    padding: 15px;
     font-family: "Oswald";
     letter-spacing: 1px;
     font-weight: normal;
@@ -64,7 +67,9 @@ body {
 .table-dark-custom tbody tr { 
     background-color: #111; 
     border: 1px solid #222; 
-    transition: 0.2s ease-in-out; 
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.2s ease, 
+                background-color 0.2s; 
 }
 
 .table-dark-custom td { 
@@ -77,8 +82,10 @@ body {
 
 .table-dark-custom tbody tr:hover { 
     background-color: #e0e0e0; 
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(255, 0, 60, 0.3);
+    transform: scale(1.03); 
+    z-index: 10; 
+    position: relative;
+    box-shadow: 0 10px 30px rgba(255, 0, 60, 0.4); 
 }
 
 .table-dark-custom tbody tr:hover td {
@@ -107,9 +114,7 @@ body {
     color: #000; 
 }
 
-.album-col {
-    font-size: 1.1rem; font-weight: 500; 
-}
+.album-col { font-size: 1.1rem; font-weight: 500; }
 
 .genre-badge {
     display: inline-block;
@@ -174,19 +179,6 @@ input:focus {
     box-shadow: 0 0 10px rgba(255,0,60,0.2); 
 }
 
-.hero-glitch {
-    padding: 120px 0;
-    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-    border-bottom: 1px solid #222; 
-}
-.glitch-text {
-    font-family: "Oswald";
-    font-size: 5rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 3px 3px 0px var(--accent-red);
-    line-height: 0.9; 
-}
 .navbar {
     background-color: rgba(0,0,0,0.95) !important;
     border-bottom: 1px solid #222; 
@@ -203,9 +195,8 @@ input:focus {
     text-transform: uppercase;
     transition: 0.3s; 
 }
-.nav-link:hover {
-    color: var(--accent-red) !important; 
-}
+.nav-link:hover { color: var(--accent-red) !important; }
+
 .btn-ghost {
     border: 2px solid white;
     color: white;
@@ -224,6 +215,7 @@ input:focus {
     border-color: var(--accent-red);
     color: white; 
 }
+
 .red-label {
     background-color: var(--accent-red);
     color: black;
@@ -232,10 +224,8 @@ input:focus {
     transform: skewX(-10deg);
     display: inline-block; 
 }
-.red-label span {
-    transform: skewX(10deg);
-    display: inline-block; 
-}
+.red-label span { transform: skewX(10deg); display: inline-block; }
+
 footer {
     margin-top: auto;
     background-color: #000;
@@ -244,32 +234,4 @@ footer {
     color: #444;
     border-top: 1px solid #222;
     font-family: "Oswald"; 
-}
-.table-responsive {
-    padding: 10px 25px;
-    overflow: visible !important;
-    overflow-x: unset !important;
-}
-
-
-.table-dark-custom { 
-    width: 100%; 
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
-.table-dark-custom tbody tr { 
-    background-color: #111; 
-    border: 1px solid #222; 
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.25s ease, 
-                background-color 0.2s; 
-}
-
-.table-dark-custom tbody tr:hover { 
-    background-color: #e0e0e0; 
-    transform: scale(1.03); 
-    z-index: 10; 
-    position: relative;
-    box-shadow: 0 10px 30px rgba(255, 0, 60, 0.4); 
 }

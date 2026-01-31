@@ -5,64 +5,48 @@
 <div class="center-screen">
   <div class="detalle-box">
     <div class="text-center mb-5">
-      <h2
-        style="
-          font-family: 'Oswald';
-          color: #fff;
-          letter-spacing: 2px;
-          margin: 0;
-        "
-      >
+      <h2 style="font-family: 'Oswald'; color: #fff; letter-spacing: 2px; margin: 0;">
         FICHA TÉCNICA
       </h2>
-      <div
-        style="
-          height: 2px;
-          width: 50px;
-          background: var(--accent-red);
-          margin: 10px auto;
-        "
-      ></div>
+      <div style="height: 2px; width: 50px; background: var(--accent-red); margin: 10px auto;"></div>
     </div>
 
     <div class="data-list">
       <div class="data-row">
         <span class="data-label">ID REF:</span>
-        <span class="data-value" style="color: var(--accent-red)"
-          >{{ album.id }}</span
-        >
+        <span class="data-value" style="color: var(--accent-red)">{{ album.id }}</span>
       </div>
-
       <div class="data-row">
         <span class="data-label">ARTISTA:</span>
-        <span class="data-value" style="color: var(--accent-red)"
-          >{{ album.artista }}</span
-        >
+        <span class="data-value" style="color: var(--accent-red)">{{ album.artista }}</span>
       </div>
-
       <div class="data-row">
         <span class="data-label">ÁLBUM:</span>
         <span class="data-value">{{ album.nombre }}</span>
       </div>
-
       <div class="data-row">
         <span class="data-label">GÉNERO:</span>
         <span class="data-value">{{ album.genero }}</span>
       </div>
-
       <div class="data-row">
         <span class="data-label">FECHA:</span>
         <span class="data-value">{{ album.fecha_lanzamiento }}</span>
       </div>
     </div>
 
-    <div class="mt-5">
-      <a
-        href="/albumes"
-        class="btn-ghost w-100 text-center"
-        style="border-color: #444; color: #888"
-      >
-        <i class="bi bi-arrow-left"></i> VOLVER AL ARCHIVO
+    <div class="mt-5 d-flex gap-2">
+      <a href="/albumes" class="btn-ghost w-100 text-center" style="border-color: #444; color: #888">
+        <i class="bi bi-arrow-left"></i> VOLVER
+      </a>
+      
+      <a href="/albumes/edit/{{ album.id }}" class="btn-ghost w-100 text-center" style="border-color: #fff;">
+        <i class="bi bi-pencil"></i> EDITAR
+      </a>
+
+      <a href="/albumes/delete/{{ album.id }}" class="btn-ghost w-100 text-center" 
+         style="border-color: var(--accent-red); color: var(--accent-red);"
+         onclick="return confirm('¿Seguro que quieres borrar este álbum?');">
+        <i class="bi bi-trash"></i> BORRAR
       </a>
     </div>
   </div>

@@ -1,34 +1,44 @@
 {% extends "fragments/base.html" %}
-{% block title %}Nuevo Registro - NEXUS{% endblock %}
+{% block title %}{{ 'EDITAR' if album else 'NUEVO' }} REGISTRO - NEXUS{% endblock %}
 
 {% block content %}
 <div class="center-screen">
     <div class="form-container">
-        
         <div class="text-center mb-5">
-            <h2 style="font-family: 'Oswald'; color: #fff; letter-spacing: 2px; margin: 0;">NUEVO REGISTRO</h2>
-            <p style="color: #666; font-size: 0.9rem;">INTRODUCE LOS DATOS DEL ÁLBUM</p>
+            <h2 style="font-family: 'Oswald'; color: #fff; letter-spacing: 2px; margin: 0;">
+                {{ 'EDITAR REGISTRO' if album else 'NUEVO REGISTRO' }}
+            </h2>
+            <p style="color: #666; font-size: 0.9rem;">
+                {{ 'MODIFICA LOS DATOS EXISTENTES' if album else 'INTRODUCE LOS DATOS DEL ÁLBUM' }}
+            </p>
         </div>
 
-        <form method="post">
+        <form method="post" action="{{ ('/albumes/edit/' ~ album.id) if album else '/albumes/new' }}">
             <div class="mb-4">
                 <label>Nombre del Álbum</label>
-                <input type="text" name="nombre" required placeholder="Escribe el nombre del disco...">
+                <input type="text" name="nombre" required 
+                       value="{{ album.nombre if album else '' }}" 
+                       placeholder="Escribe el nombre del disco...">
             </div>
 
             <div class="mb-4">
                 <label>Artista / Banda</label>
-                <input type="text" name="artista" required placeholder="Nombre de la banda...">
+                <input type="text" name="artista" required 
+                       value="{{ album.artista if album else '' }}"
+                       placeholder="Nombre de la banda...">
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label>Género Musical</label>
-                    <input type="text" name="genero" placeholder="Ej: Metalcore">
+                    <input type="text" name="genero" 
+                           value="{{ album.genero if album else '' }}"
+                           placeholder="Ej: Metalcore">
                 </div>
                 <div class="col-md-6 mb-4">
                     <label>Lanzamiento</label>
-                    <input type="date" name="fecha_lanzamiento">
+                    <input type="date" name="fecha_lanzamiento" 
+                           value="{{ album.fecha_lanzamiento if album else '' }}">
                 </div>
             </div>
 
@@ -41,7 +51,6 @@
                 </button>
             </div>
         </form>
-
     </div>
 </div>
 {% endblock %}
