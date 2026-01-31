@@ -11,6 +11,12 @@
     text-shadow: none;
 }
 
+::-webkit-selection {
+        background: #ff003c !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
+
 
 body {
     background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
