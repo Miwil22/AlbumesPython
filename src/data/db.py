@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import time
 from sqlalchemy.exc import OperationalError
-from sqlmodel import create_engine, SQLModel, Session
+from sqlmodel import create_engine, Session, SQLModel
 from models.album import Album
 
 load_dotenv()
@@ -10,10 +10,11 @@ load_dotenv()
 db_user: str = os.getenv("DB_USER", "miguel")
 db_password: str = os.getenv("DB_PASSWORD", "1234")
 db_server: str = os.getenv("DB_SERVER", "fastapi-db")
-db_port: int = int(os.getenv("DB_PORT", 3306))
+db_port: int = int(os.getenv("DB_PORT", 5432))
 db_name: str = os.getenv("DB_NAME", "albumesdb")
 
-DATABASE_URL = f"mysql+pymysql://{db_user}:{db_password}@{db_server}:{db_port}/{db_name}"
+DATABASE_URL = f"postgresql+psycopg2://{db_user}:{db_password}@{db_server}:{db_port}/{db_name}"
+
 engine = create_engine(os.getenv("DB_URL", DATABASE_URL), echo=True)
 
 def get_session():
@@ -21,9 +22,7 @@ def get_session():
         yield session
 
 def init_db():
-
-    
-    print("--- CONECTANDO A BASE DE DATOS (ESPERANDO A MYSQL) ---")
+    print("--- CONECTANDO A BASE DE DATOS (POSTGRESQL) ---")
     MAX_RETRIES = 30
     
     for i in range(MAX_RETRIES):
@@ -44,12 +43,12 @@ def init_db():
                 session.add(Album(nombre="I Let It In and It Took Everything", artista="Loathe", genero="Metalcore / Shoegaze", fecha_lanzamiento="2020-02-07"))
                 session.commit()
             
-            print("--- ¡BASE DE DATOS INICIALIZADA CORRECTAMENTE! ---")
+            print("--- ¡BASE DE DATOS POSTGRESQL INICIALIZADA! ---")
             break 
             
         except OperationalError as e:
-            print(f"MySQL no está listo todavía (Intento {i+1}/{MAX_RETRIES}). Esperando 2s...")
+            print(f"PostgreSQL no está listo (Intento {i+1}/{MAX_RETRIES}). Esperando 2s...")
             time.sleep(2)
             if i == MAX_RETRIES - 1:
-                print("ERROR: No se pudo conectar a MySQL tras varios intentos.")
+                print("ERROR: No se pudo conectar a PostgreSQL tras varios intentos.")
                 raise e

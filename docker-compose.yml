@@ -11,14 +11,24 @@ services:
       - "8000:8000"
     depends_on:
       - fastapi-db
+    environment:
+      - DB_SERVER=fastapi-db
+      - DB_PORT=5432
+      - DB_NAME=albumesdb
+      - DB_USER=miguel
+      - DB_PASSWORD=1234
   
   fastapi-db:
-    image: mysql
+    image: postgres:15
     container_name: fastapi-db-albumes
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: albumesdb
-      MYSQL_USER: miguel
-      MYSQL_PASSWORD: 1234
+      POSTGRES_USER: miguel
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: albumesdb
     ports:
-      - "3306:3306"
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

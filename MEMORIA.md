@@ -12,8 +12,11 @@ En esta fase se ha implementado la conexión a una base de datos real para que l
 
 ![App](src/static/img/punto2.png)
 
-## 2. Base de datos en docker
-En esta fase se ha implementado la conexión a una base de datos real para que la información no se pierda al reiniciar el servidor.
-
+## 3. Base de datos en docker
+La aplicación es totalmente funcional con MySQL en un entorno aislado con Docker:
 ![App](src/static/img/punto3.png)
+
+## 4. Base de datos en docker
+La aplicación es totalmente funcional con Postgres en un entorno aislado con Docker:
+![App](src/static/img/punto4.png)
 
