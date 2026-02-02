@@ -1,65 +1,76 @@
 # Memoria del Proyecto Álbumes - NEXUS.AUDIO
 
 ## 1. Integración de Jinja2 y API
-Se han añadido plantillas HTML utilizando el motor **Jinja2** para visualizar los datos de la API. Esto permite separar la lógica de los datos (Backend) de la presentación visual (Frontend).
+Se han añadido plantillas HTML utilizando el motor **Jinja2** para visualizar los datos de la API. Esto permite separar la lógica de los datos (Backend) de la presentación visual (Frontend), facilitando la mantenibilidad del código y permitiendo renderizar contenido dinámico en el servidor.
 
 ![App](src/static/img/punto1.png)
 
 ## 2. Base de datos en local
-En esta fase se ha implementado la conexión a una base de datos real utilizando **SQLModel**. Esto asegura la persistencia de los datos, evitando que se pierdan al reiniciar el servidor.
+En esta fase se ha implementado la conexión a una base de datos persistente utilizando **SQLModel**. Esto asegura la integridad de los datos, evitando que se pierdan al reiniciar el servidor, un problema común cuando se trabaja con almacenamiento en memoria.
 
 ![App](src/static/img/punto2.png)
 
 ## 3. Dockerización con MySQL y Estilo
-La aplicación se ha contenerizado utilizando **Docker**. Se han creado dos servicios en el `docker-compose.yml`:
-1.  **fastapi-app:** La aplicación web.
+La aplicación se ha contenerizado utilizando **Docker**, lo que garantiza que el entorno de desarrollo sea idéntico al de producción. Se han orquestado dos servicios en el `docker-compose.yml`:
+1.  **fastapi-app:** La aplicación web (API + Frontend).
 2.  **fastapi-db:** Base de datos **MySQL**.
 
-Además, se ha implementado el diseño final "Dark Mode" (NEXUS) con CSS personalizado.
+Además, se ha implementado el diseño final "Dark Mode" (NEXUS) con CSS personalizado, mejorando la experiencia de usuario (UX).
 
 ![App](src/static/img/punto3.png)
 
 ## 4. Migración a PostgreSQL
-Para demostrar la flexibilidad del ORM, se ha migrado el sistema a **PostgreSQL** manteniendo la infraestructura de Docker.
-- Se cambió el contenedor de base de datos a `postgres:15`.
-- Se actualizó el driver de Python a `psycopg2-binary`.
-- El código de la aplicación no requirió cambios gracias a SQLModel.
+Para demostrar la flexibilidad del ORM y preparar el sistema para un entorno de producción más robusto, se ha migrado el motor de base de datos a **PostgreSQL**.
+
+**Cambios Técnicos:**
+- **Versión:** Se seleccionó **PostgreSQL 15** por ser una versión estable y ampliamente soportada, que ofrece un excelente equilibrio entre rendimiento, seguridad y compatibilidad con las librerías modernas de Python.
+- **Driver:** Se actualizó el driver de Python a `psycopg2-binary` para permitir la comunicación con el nuevo motor.
+- **Transparencia:** Gracias al uso de SQLModel, no fue necesario reescribir las consultas SQL en el código de la aplicación; el ORM gestionó la traducción de dialectos automáticamente.
 
 ![App](src/static/img/punto4.png)
 
 ## 5. Despliegue en la Nube (Render)
-El proyecto ha sido desplegado en producción utilizando la plataforma **Render**.
+El proyecto ha sido desplegado en producción utilizando la plataforma **Render**, aprovechando su capacidad para desplegar contenedores Docker y gestionar bases de datos.
 
-### Paso 1: Creación de la Base de Datos
-Primero, se creó una instancia de **PostgreSQL** gestionada en la nube (zona Frankfurt).
+### Paso 1: Creación de la Base de Datos Gestionada
+Se provisionó una instancia de **PostgreSQL** en la nube.
+- **Región:** Se eligió **Frankfurt (EU Central)**. La elección de una región europea es crítica para minimizar la latencia de red para los usuarios locales y cumplir con normativas de datos.
+- **Tipo:** Instancia gestionada (Managed), lo que significa que Render se encarga de las copias de seguridad y la disponibilidad.
 
 ![Creación DB](src/static/img/punto5.1.png)
 ![Plan Gratuito](src/static/img/punto5.2.png)
 
-Una vez creada y disponible, obtuvimos la **Internal Database URL** para la conexión interna dentro de la red de Render.
+Una vez activa, se obtuvo la **Internal Database URL**. Esta dirección permite que nuestra aplicación web se comunique con la base de datos a través de la red privada de Render, lo cual es mucho más rápido y seguro que hacerlo a través de internet público.
 
 ![Estado DB](src/static/img/punto5.3.png)
 ![Credenciales](src/static/img/punto5.4.png)
 
-### Paso 2: Creación del Web Service
-Se creó un nuevo servicio web conectado al repositorio de GitHub (`master`).
+### Paso 2: Configuración del Web Service
+Se creó un **Web Service** vinculado directamente al repositorio de GitHub (`master`). Esto habilita la integración continua (CI/CD): cada vez que se hace un `push` a la rama master, Render actualiza la web automáticamente.
 
 ![Nuevo Servicio](src/static/img/punto5.5.png)
 
-Render detectó automáticamente que el proyecto utiliza **Docker** gracias al `Dockerfile` presente en el repositorio.
+El sistema detectó automáticamente el archivo `Dockerfile` en la raíz del proyecto, configurando el entorno de ejecución (Runtime) como **Docker** sin necesidad de configuración manual adicional.
 
 ![Configuración Docker](src/static/img/punto5.6.png)
 
-### Paso 3: Variables de Entorno
-Para conectar la web con la base de datos sin exponer credenciales en el código, se configuró la variable de entorno `DB_URL` con la dirección interna de la base de datos PostgreSQL creada anteriormente.
+### Paso 3: Gestión de Variables de Entorno (Seguridad)
+Siguiendo las buenas prácticas de seguridad (metodología *12-Factor App*), las credenciales no se incluyen en el código fuente.
+Se configuró la variable de entorno `DB_URL` en el panel de administración de Render con el valor de la conexión interna de PostgreSQL. La aplicación Python lee esta variable al iniciarse, conectándose así a la base de datos de producción en lugar de la local.
 
 ![Variables de Entorno](src/static/img/punto5.7.png)
 
-### Paso 4: Despliegue y Resultado Final
-Render construyó la imagen de Docker y desplegó el servicio correctamente (`Your service is live`).
+### Paso 4: Construcción y Despliegue
+Render inició el proceso de construcción:
+1.  Clonado del repositorio.
+2.  Construcción de la imagen Docker (instalación de dependencias `requirements.txt`).
+3.  Arranque del servidor `uvicorn`.
+
+Tras verificar que el servicio respondía correctamente en el puerto expuesto, el estado cambió a `Live`.
 
 ![Logs del Despliegue](src/static/img/punto5.8.png)
 
-La aplicación es ahora accesible públicamente a través de internet, totalmente funcional y con persistencia de datos en la nube.
+### Resultado Final
+La aplicación es ahora accesible públicamente a través de una URL segura (HTTPS), es totalmente funcional y cuenta con persistencia de datos en la nube.
 
 ![Resultado Final](src/static/img/punto5.9.png)
