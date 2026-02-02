@@ -20,3 +20,11 @@ La aplicación es totalmente funcional con MySQL en un entorno aislado con Docke
 La aplicación es totalmente funcional con Postgres en un entorno aislado con Docker:
 ![App](src/static/img/punto4.png)
 
+![App](src/static/img/punto5.1.png)
+![App](src/static/img/punto5.2.png)
+![App](src/static/img/punto5.3.png)
+![App](src/static/img/punto5.4.png)
+![App](src/static/img/punto5.5.png)
+![App](src/static/img/punto4.png)
+![App](src/static/img/punto4.png)
+![App](src/static/img/punto4.png)
