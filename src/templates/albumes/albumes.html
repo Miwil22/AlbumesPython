@@ -16,7 +16,9 @@
           <thead>
             <tr>
               <th scope="col" style="width: 50px;">#</th>
-              <th scope="col">ARTISTA</th> <th scope="col">ÁLBUM</th>   <th scope="col" class="text-end">GÉNERO</th>
+              <th scope="col">ARTISTA</th> 
+              <th scope="col">ÁLBUM</th>   
+              <th scope="col" class="text-end">GÉNERO</th>
               <th scope="col" class="text-end">ACCIÓN</th>
             </tr>
           </thead>
@@ -24,15 +26,11 @@
             {% for album in albumes %}
             <tr>
               <td class="rank-num">{{ album.id }}</td>
-              
               <td class="artist-col">{{ album.artista }}</td>
-              
               <td class="album-col">{{ album.nombre }}</td>
-              
               <td class="text-end">
                 <span class="genre-badge">{{ album.genero }}</span>
               </td>
-              
               <td class="text-end">
                   <a href="/albumes/{{ album.id }}" style="text-decoration: none;">
                       <i class="bi bi-arrow-right" style="color: var(--accent-red); font-size: 1.5rem; cursor: pointer;"></i>

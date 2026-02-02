@@ -4,12 +4,13 @@
 {% block content %}
 <div class="center-screen">
     <div class="form-container">
+        
         <div class="text-center mb-5">
             <h2 style="font-family: 'Oswald'; color: #fff; letter-spacing: 2px; margin: 0;">
                 {{ 'EDITAR REGISTRO' if album else 'NUEVO REGISTRO' }}
             </h2>
             <p style="color: #666; font-size: 0.9rem;">
-                {{ 'MODIFICA LOS DATOS EXISTENTES' if album else 'INTRODUCE LOS DATOS DEL ÁLBUM' }}
+                {{ 'MODIFICA LOS DATOS' if album else 'INTRODUCE LOS DATOS DEL ÁLBUM' }}
             </p>
         </div>
 
@@ -51,6 +52,7 @@
                 </button>
             </div>
         </form>
+
     </div>
 </div>
 {% endblock %}
