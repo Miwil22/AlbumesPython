@@ -14,10 +14,7 @@ La aplicación Python conecta localmente (`localhost`) contra el contenedor Dock
 
 ![Captura del entorno local](src/static/img/punto1-2.png)
 
-## 2. Base de datos en local [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-2)
-En esta fase se ha implementado la conexión a una base de datos persistente utilizando **SQLModel**. Esto asegura la integridad de los datos, evitando que se pierdan al reiniciar el servidor, un problema común cuando se trabaja con almacenamiento en memoria.
 
-![App](src/static/img/punto2.png)
 
 ## 3. Dockerización con MySQL y Estilo [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-3)
 La aplicación se ha contenerizado utilizando **Docker**, lo que garantiza que el entorno de desarrollo sea idéntico al de producción. Se han orquestado dos servicios en el `docker-compose.yml`:
