@@ -1,34 +1,19 @@
-name: fastapi-albumes
+name: fastapi-mysql-local
 
 services:
-  fastapi-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fastapi-app-albumes
+  db-mysql:
+    image: mysql:8.0
+    container_name: db-mysql
     restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
-      - fastapi-db
     environment:
-      - DB_SERVER=fastapi-db
-      - DB_PORT=5432
-      - DB_NAME=albumesdb
-      - DB_USER=miguel
-      - DB_PASSWORD=1234
-  
-  fastapi-db:
-    image: postgres:15
-    container_name: fastapi-db-albumes
-    environment:
-      POSTGRES_USER: miguel
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: albumesdb
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: albumesdb
+      MYSQL_USER: miguel
+      MYSQL_PASSWORD: 1234
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  postgres_data:
+  mysql_data:
