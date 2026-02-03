@@ -1,7 +1,5 @@
 # Memoria del Proyecto Álbumes - NEXUS.AUDIO
 
-# Memoria del Proyecto Álbumes - NEXUS.AUDIO
-
 ## 1 y 2. Desarrollo Local: Integración Web y Persistencia  [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-1-y-2)
 
 * **Frontend (Jinja2):** Se ha integrado el motor de plantillas **Jinja2** con **FastAPI**.
