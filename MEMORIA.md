@@ -1,4 +1,6 @@
-# Memoria del Proyecto Álbumes
+# Memoria del Proyecto Álbumes - NEXUS.AUDIO
+
+# Memoria del Proyecto Álbumes - NEXUS.AUDIO
 
 ## 1 y 2. Desarrollo Local: Integración Web y Persistencia  [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-1-y-2)
 
@@ -13,13 +15,11 @@ La aplicación Python conecta localmente (`localhost`) contra el contenedor Dock
 ![Captura del entorno local](src/static/img/punto1-2.png)
 
 
-## 2. Base de datos en local [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-3)
-En esta fase se ha implementado la conexión a una base de datos real para que la información no se pierda al reiniciar el servidor.
+## 3. Dockerización con MySQL y Estilo [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-3)
+La aplicación se ha contenerizado utilizando **Docker**, lo que garantiza que el entorno de desarrollo sea idéntico al de producción. Se han orquestado dos servicios en el `docker-compose.yml`:
+1.  **fastapi-app:** La aplicación web (API + Frontend).
+2.  **fastapi-db:** Base de datos **MySQL**.
 
-![App](src/static/img/punto2.png)
-
-## 2. Base de datos en docker
-En esta fase se ha implementado la conexión a una base de datos real para que la información no se pierda al reiniciar el servidor.
+Además, se ha implementado el diseño final "Dark Mode" (NEXUS) con CSS personalizado, mejorando la experiencia de usuario (UX).
 
 ![App](src/static/img/punto3.png)
-
