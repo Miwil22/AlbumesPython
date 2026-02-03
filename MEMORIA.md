@@ -1,6 +1,6 @@
 # Memoria del Proyecto Álbumes - NEXUS.AUDIO
 
-## 1 y 2. Desarrollo Local: Integración Web y Persistencia
+## 1 y 2. Desarrollo Local: Integración Web y Persistencia  [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-1-y-2)
 
 * **Frontend (Jinja2):** Se ha integrado el motor de plantillas **Jinja2** con **FastAPI**.
 * **Base de Datos (Docker MySQL):** Se ha sustituido el almacenamiento en memoria por una base de datos **MySQL 8.0** ejecutada en un contenedor **Docker**.
