@@ -1,9 +1,18 @@
 # Memoria del Proyecto Álbumes - NEXUS.AUDIO
 
-## 1. Integración de Jinja2 y API [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-1)
-Se han añadido plantillas HTML utilizando el motor **Jinja2** para visualizar los datos de la API. Esto permite separar la lógica de los datos (Backend) de la presentación visual (Frontend), facilitando la mantenibilidad del código y permitiendo renderizar contenido dinámico en el servidor.
+# Memoria del Proyecto Álbumes - NEXUS.AUDIO [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-1-y-2)
 
-![App](src/static/img/punto1.png)
+## 1 y 2. Desarrollo Local: Integración Web y Persistencia
+
+* **Frontend (Jinja2):** Se ha integrado el motor de plantillas **Jinja2** con **FastAPI**.
+* **Base de Datos (Docker MySQL):** Se ha sustituido el almacenamiento en memoria por una base de datos **MySQL 8.0** ejecutada en un contenedor **Docker**.
+    * **Ventaja:** Garantiza que los datos persistan entre reinicios del servidor y evita tener que instalar MySQL.
+* **Estilo Visual:** Se ha implementado una interfaz personalizada con temática "Dark Metalcore" (NEXUS).
+
+### Arquitectura Actual:
+La aplicación Python conecta localmente (`localhost`) contra el contenedor Docker que expone el puerto `3306`.
+
+![Captura del entorno local](src/static/img/punto1-2.png)
 
 ## 2. Base de datos en local [Github](https://github.com/Miwil22/AlbumesPython/tree/rama-punto-2)
 En esta fase se ha implementado la conexión a una base de datos persistente utilizando **SQLModel**. Esto asegura la integridad de los datos, evitando que se pierdan al reiniciar el servidor, un problema común cuando se trabaja con almacenamiento en memoria.
